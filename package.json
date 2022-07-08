@@ -1,0 +1,17 @@
+{
+  "name": "emerald",
+  "version": "1.0.0",
+  "description": "A discord bot made for programming teams",
+  "main": "./src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "rrishi",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/builders": "^0.15.0",
+    "@discordjs/rest": "^0.5.0",
+    "discord-api-types": "^0.36.1",
+    "discord.js": "^13.8.1"
+  }
+}
