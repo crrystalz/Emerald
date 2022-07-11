@@ -1,6 +1,7 @@
 const {
     SlashCommandBuilder
 } = require('@discordjs/builders');
+const { spawn } = require('child_process');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -33,7 +34,10 @@ module.exports = {
         ),
 
     async execute(interaction) {
+        const fileLink = interaction.options.getString('file_link');
         const threadName = interaction.options.getString('name');
+        const lineNumber = interaction.options.getInteger('line_number');
+        const margin = interaction.options.getInteger('margin');
         const comment = interaction.options.getString('comment');
 
         const thread = await interaction.channel.threads.create({
@@ -42,6 +46,27 @@ module.exports = {
         });
 
         console.log(`Created thread: ${thread.name}`);
+
+        let input = { 
+            'file_link': fileLink,
+            'line_number': lineNumber,
+            'margin': margin,
+        }
+
+        const pyfile = spawn('python', [`./src/commands/GitHub_Code_Commenting/scrape.py`, JSON.stringify(input)]);
+
+        pyfile.stdout.on('data', (data) => {
+            console.log('e')
+            console.log(`stdout: ${data}`);
+        });
+
+        pyfile.stderr.on('data', (data) => {
+            console.error(`stderr: ${data}`);
+        });
+
+        pyfile.on('close', (code) => {
+            console.log(`child process exited with code ${code}`);
+        });
 
         await thread.send(comment);
         await interaction.reply('Succesfully created a thread!');

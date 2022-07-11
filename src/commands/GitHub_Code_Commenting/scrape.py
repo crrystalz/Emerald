@@ -1,4 +1,7 @@
+import sys
 import requests
+import json
+
 
 def scrape(url, line, margin):
     url = url[:8] + 'raw.' + url[8:]
@@ -12,6 +15,22 @@ def scrape(url, line, margin):
     for i in range((line-1)-margin, (line-1)+margin+1):
         snippet.append(lines[i])
 
-    return snippet
+    print(snippet)
 
-print(scrape("https://github.com/crrystalz/Emerald/blob/main/.gitignore", 2, 1))
+
+# input = str(sys.argv[1]).split(" ")
+# input = input[0]
+
+print(dict(sys.argv[1]))
+input = json.load(sys.argv[1])
+
+url = input["file_link"]
+line = input["line_number"]
+margin = input["margin"]
+
+print(input)
+print(url)
+print(line)
+print(margin)
+
+scrape(url, line, margin)
