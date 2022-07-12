@@ -2,6 +2,7 @@ const {
     SlashCommandBuilder
 } = require('@discordjs/builders');
 const { spawn } = require('child_process');
+const { MessageEmbed } = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -32,6 +33,15 @@ module.exports = {
             .setDescription('The comment to add to the thread')
             .setRequired(true)
         ),
+        // .addStringOption(option =>
+        //     option.setName('file_type')
+        //     .setDescription('Optional field, required for syntax highlighting')
+        //     .setRequired(true)
+        //     .addChoices(
+        //         { name: 'js', value: 'js' },
+        //         { name: 'python', value: 'py'},
+        //     )
+        // ),
 
     async execute(interaction) {
         const fileLink = interaction.options.getString('file_link');
@@ -39,6 +49,7 @@ module.exports = {
         const lineNumber = interaction.options.getInteger('line_number');
         const margin = interaction.options.getInteger('margin');
         const comment = interaction.options.getString('comment');
+        // const fileType = interaction.options.getString('file_type');
 
         const thread = await interaction.channel.threads.create({
             name: threadName,
@@ -51,13 +62,36 @@ module.exports = {
             'file_link': fileLink,
             'line_number': lineNumber,
             'margin': margin,
+            // 'file_type': fileType,
         }
 
         const pyfile = spawn('python', [`./src/commands/GitHub_Code_Commenting/scrape.py`, JSON.stringify(input)]);
-
+        
         pyfile.stdout.on('data', (data) => {
-            console.log('e')
-            console.log(`stdout: ${data}`);
+            const snippet = data.toString().split(',');
+            // const snippet = [];
+            // for (i = 0; i < snippet1.length; i++) {
+            //     console.log(snippet1[i].substr(1, -1))
+            //     snippet.push(snippet1[i].substr(1, -1));
+            // }
+
+            // const snippet = snippet1.map(s => s.slice(-1));
+
+            console.log(snippet)
+            
+            thread.send(`${snippet}`);
+
+            const commentEmbed = new MessageEmbed()
+                .setColor('#152023')
+                .addFields(
+                    { name: 'Comment', value: `${comment}`},
+                )
+            
+            // thread.send(comment);
+            thread.send({ embeds: [commentEmbed] });
+            interaction.reply('Succesfully created a thread with code snippet and comment!');
+            // console.log(`${data}`)
+            // snippet.push(`${data}`);
         });
 
         pyfile.stderr.on('data', (data) => {
@@ -67,8 +101,5 @@ module.exports = {
         pyfile.on('close', (code) => {
             console.log(`child process exited with code ${code}`);
         });
-
-        await thread.send(comment);
-        await interaction.reply('Succesfully created a thread!');
     },
 }
