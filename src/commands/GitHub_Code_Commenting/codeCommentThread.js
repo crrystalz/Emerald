@@ -6,8 +6,8 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('create_thread')
-        .setDescription('Creates thread with given name')
+        .setName('code_comment_thread')
+        .setDescription('Creates thread with code and comment')
         .addStringOption(option =>
             option.setName('file_link')
             .setDescription('Link to the file that comment is about')
@@ -79,17 +79,19 @@ module.exports = {
 
             console.log(snippet)
             
-            thread.send(`${snippet}`);
+            interaction.reply(`${snippet}`);
 
             const commentEmbed = new MessageEmbed()
                 .setColor('#152023')
                 .addFields(
                     { name: 'Comment', value: `${comment}`},
                 )
+                // .setImage(interaction.user.avatarURL())
+                .setFooter({ text: "Comment created by " + interaction.user.username, iconURL: interaction.user.displayAvatarURL() });
             
             // thread.send(comment);
             thread.send({ embeds: [commentEmbed] });
-            interaction.reply('Succesfully created a thread with code snippet and comment!');
+            // interaction.reply('Succesfully created a thread with code snippet and comment!');
             // console.log(`${data}`)
             // snippet.push(`${data}`);
         });
