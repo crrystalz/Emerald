@@ -47,4 +47,4 @@ In order to activate the bot, create a file in the root folder of the cloned rep
 
 If your are having trouble locally hosting the bot, DM me on Discord at crrystalz#0001
 
-Please report any issues with using the bot[here](https://github.com/crrystalz/Emerald/issues/new). If you have any feature requests, send them to me on Discord at crrystalz#0001
+Please report any issues with using the bot [here](https://github.com/crrystalz/Emerald/issues/new). If you have any feature requests, send them to me on Discord at crrystalz#0001
