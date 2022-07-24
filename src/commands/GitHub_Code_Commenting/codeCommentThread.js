@@ -7,25 +7,25 @@ const { MessageEmbed } = require('discord.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('code_comment_thread')
-        .setDescription('Creates thread with code and comment')
+        .setDescription('Creates thread with code snippet and comment')
         .addStringOption(option =>
             option.setName('file_link')
-            .setDescription('Link to the file that comment is about')
+            .setDescription('Link to the file that snippet is in')
             .setRequired(true)
         )
         .addStringOption(option =>
             option.setName('name')
-            .setDescription('The name of the thread')
+            .setDescription('The name of the thread to be created')
             .setRequired(true)
         )
         .addIntegerOption(option =>
             option.setName('line_number')
-            .setDescription('The line number the comment is about')
+            .setDescription('The line number of the middle of snipppet')
             .setRequired(true)
         )
         .addIntegerOption(option =>
             option.setName('margin')
-            .setDescription('The number of prior and following lines to include in the message')
+            .setDescription('The number of prior and following lines to include in the snippet')
             .setRequired(true)
         )
         .addStringOption(option =>

@@ -6,21 +6,21 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('code_comment')
-        .setDescription('Sends code and comment in channel')
+        .setName('code_scrape')
+        .setDescription('Sends code snippet in channel')
         .addStringOption(option =>
             option.setName('file_link')
-            .setDescription('Link to the file that snippet is in')
+            .setDescription('Link to the file that comment is about')
             .setRequired(true)
         )
         .addIntegerOption(option =>
             option.setName('line_number')
-            .setDescription('The line number of the middle of snipppet')
+            .setDescription('The line number the comment is about')
             .setRequired(true)
         )
         .addIntegerOption(option =>
             option.setName('margin')
-            .setDescription('The number of prior and following lines to include in the snippet')
+            .setDescription('The number of prior and following lines to include in the message')
             .setRequired(true)
         ),
 
@@ -28,7 +28,6 @@ module.exports = {
         const fileLink = interaction.options.getString('file_link');
         const lineNumber = interaction.options.getInteger('line_number');
         const margin = interaction.options.getInteger('margin');
-        const comment = interaction.options.getString('comment');
 
         let input = { 
             'file_link': fileLink,
@@ -44,16 +43,6 @@ module.exports = {
             console.log(snippet)
             
             interaction.reply(`${snippet}`);
-
-            const commentEmbed = new MessageEmbed()
-                .setColor('#152023')
-                .addFields(
-                    { name: 'Comment', value: `${comment}`},
-                )
-
-                .setFooter({ text: "Comment created by " + interaction.user.username, iconURL: interaction.user.displayAvatarURL() });
-            
-            interaction.channel.send({ embeds: [commentEmbed] });
         });
 
         pyfile.stderr.on('data', (data) => {
