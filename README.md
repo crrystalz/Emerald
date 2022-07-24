@@ -43,7 +43,7 @@ Naviage to the [Discord Developer Portal](https://discord.com/developers/applica
 Click on the OAuth2 button in the menu on the left, and activate the "bot" and "applications.command" scopes. Then in Bot Permissions, give your bot Administration access, and the link generated will invite the bot to your server when activated.
 
 ## Activating the bot
-In order to activate the bot, create a file in the root folder of the cloned repository called ``.env``. In this file type ``DISCORD_TOKEN = {insert_token_here}". Paste in the token from your clipboard that you copied earlier, note that there shouldn't be any curly braces. Finally. in command prompt, naviage to the root directory of the bot and type ``node .``, this should start the bot.
+In order to activate the bot, create a file in the root folder of the cloned repository called ``.env``. In this file type ``DISCORD_TOKEN = {insert_token_here}"``. Paste in the token from your clipboard that you copied earlier, note that there shouldn't be any curly braces. Finally. in command prompt, naviage to the root directory of the bot and type ``node .``, this should start the bot.
 
 If your are having trouble locally hosting the bot, DM me on Discord at crrystalz#0001
 
