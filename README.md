@@ -7,6 +7,10 @@ Emerald can be invited to any Discord server with this [link](https://discord.co
 
 A full list of Emerald's commands can be viewed by running ``/help``
 
+<img src="https://user-images.githubusercontent.com/61859932/219830980-a205a7ce-9d7a-464b-8598-b054fbd75144.png" width=30%>
+<img src="https://user-images.githubusercontent.com/61859932/219830984-fc642f2d-b582-4eb0-b51a-a3382ef5afad.png" width=30%>
+<img src="https://user-images.githubusercontent.com/61859932/219830986-27771e08-9258-4468-b668-450b7029c41c.png" width=30%>
+
 # Locally running a copy of Emerald
 As Emerald is currently hosted on my own computer, the bot is often down. However, it's easy to get a copy of Emerald up and running on your own computer. **Please refrain from calling the bot your own work, and any modificatinos you wish to make to the bot please add as a pull request rather than modifying the bot in your own server, and you will be duly credited for your contribution(s).**
 
